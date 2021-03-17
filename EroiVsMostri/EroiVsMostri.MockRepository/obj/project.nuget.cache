@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "j6PmpFKcaLDHgsi4lnbdMjS/Edp1xXQ+cvf4PW9h8x84S+Bphj/5HLpSB4YQ5gaYh8qF7kfIP5HbJTzdEOiH1g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\maria.chiara.colla\\Documents\\week8\\EroeVsMostri\\EroiVsMostri\\EroiVsMostri.MockRepository\\EroiVsMostri.MockRepository.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\maria.chiara.colla\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\maria.chiara.colla\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

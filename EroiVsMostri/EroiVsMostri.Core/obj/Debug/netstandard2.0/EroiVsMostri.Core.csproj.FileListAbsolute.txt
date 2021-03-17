@@ -1,0 +1,9 @@
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Core\bin\Debug\netstandard2.0\EroiVsMostri.Core.deps.json
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Core\bin\Debug\netstandard2.0\EroiVsMostri.Core.dll
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Core\bin\Debug\netstandard2.0\EroiVsMostri.Core.pdb
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Core\obj\Debug\netstandard2.0\EroiVsMostri.Core.csprojAssemblyReference.cache
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Core\obj\Debug\netstandard2.0\EroiVsMostri.Core.AssemblyInfoInputs.cache
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Core\obj\Debug\netstandard2.0\EroiVsMostri.Core.AssemblyInfo.cs
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Core\obj\Debug\netstandard2.0\EroiVsMostri.Core.csproj.CoreCompileInputs.cache
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Core\obj\Debug\netstandard2.0\EroiVsMostri.Core.dll
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Core\obj\Debug\netstandard2.0\EroiVsMostri.Core.pdb

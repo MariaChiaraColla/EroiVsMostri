@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EroiVsMostri.ADORepository\EroiVsMostri.ADORepository.csproj" />
+    <ProjectReference Include="..\EroiVsMostri.Core\EroiVsMostri.Core.csproj" />
+  </ItemGroup>
+
+</Project>

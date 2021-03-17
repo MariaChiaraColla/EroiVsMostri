@@ -1,0 +1,12 @@
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\bin\Debug\netstandard2.0\EroiVsMostri.Services.deps.json
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\bin\Debug\netstandard2.0\EroiVsMostri.Services.dll
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\bin\Debug\netstandard2.0\EroiVsMostri.Services.pdb
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\bin\Debug\netstandard2.0\EroiVsMostri.Core.dll
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\bin\Debug\netstandard2.0\EroiVsMostri.Core.pdb
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.csprojAssemblyReference.cache
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.AssemblyInfoInputs.cache
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.AssemblyInfo.cs
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.csproj.CoreCompileInputs.cache
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.csproj.CopyComplete
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.dll
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.pdb
