@@ -68,5 +68,30 @@ namespace EroiVsMostri.ADORepository.Estensioni
                 Proprietario = (int)reader["GiocatoreID"]
             };
         }
+
+        //MOSTRO
+        public static Mostro ToMostro(this SqlDataReader reader)
+        {
+            return new Mostro()
+            {
+                ID = (int)reader["ID"],
+                Nome = (String)reader["Nome"],
+                ClasseDiAppartenenza = (int)reader["ClasseID"],
+                ArmaScelta = (int)reader["ArmaID"],
+                IsEroe = (bool)reader["IsEroe"],
+                PuntiVita = (int)reader["PuntiVita"],
+                Livello = (int)reader["Livello"]
+            };
+        }
+
+        //PASSAGGIO LIVELLO
+        public static PassaggioLivello ToPassaggioLivello(this SqlDataReader reader)
+        {
+            return new PassaggioLivello()
+            {
+                Livello = (int)reader["Livello"],
+                PuntiNecessari = (int)reader["PuntiAccumulati"]
+            };
+        }
     }
 }

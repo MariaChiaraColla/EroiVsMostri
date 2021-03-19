@@ -10,3 +10,5 @@ C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMost
 C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.csproj.CopyComplete
 C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.dll
 C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\obj\Debug\netstandard2.0\EroiVsMostri.Services.pdb
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\bin\Debug\netstandard2.0\EroiVsMostri.ADORepository.dll
+C:\Users\maria.chiara.colla\Documents\week8\EroeVsMostri\EroiVsMostri\EroiVsMostri.Services\bin\Debug\netstandard2.0\EroiVsMostri.ADORepository.pdb

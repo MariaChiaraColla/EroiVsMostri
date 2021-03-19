@@ -57,7 +57,7 @@ namespace EroiVsMostri.Services
                     Console.WriteLine("Inserisci un numero!");
                 }
             }
-            Console.WriteLine(giocatore.ToString());
+            Console.WriteLine("Benvenuto/a! " + giocatore.Nome);
             return giocatore;
         }
 
@@ -71,29 +71,9 @@ namespace EroiVsMostri.Services
             Console.WriteLine("Nome del giocatore: ");
             string nome = Console.ReadLine();
 
-            //ruolo
-            int r = 2;
-            bool ruolo = false;
-            
-            while (r != 0 && r != 1)
-            {
-                Console.WriteLine("Ruolo del giocatore: 1 per Admin, 2 per Utente ");
-                try
-                {
-                    r = Convert.ToInt32(Console.ReadLine());
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine("Inserisci 0 o 1!");
-                }
-                
-            }
-            if (r == 1) ruolo = true;
-
             Giocatore giocatore = new Giocatore()
             {
-                Nome = nome,
-                Ruolo = ruolo
+                Nome = nome
             };
 
             _repo.Create(giocatore);

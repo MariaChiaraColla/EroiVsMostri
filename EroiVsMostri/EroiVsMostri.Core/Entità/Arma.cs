@@ -15,7 +15,7 @@ namespace EroiVsMostri.Core.Entità
         //Metodi
         public override string ToString()
         {
-            return Nome;
+            return ID+") "+Nome;
         }
     }
 }

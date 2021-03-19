@@ -136,6 +136,7 @@
       },
       "EroiVsMostri.Services/1.0.0": {
         "dependencies": {
+          "EroiVsMostri.ADORepository": "1.0.0",
           "EroiVsMostri.Core": "1.0.0"
         },
         "runtime": {

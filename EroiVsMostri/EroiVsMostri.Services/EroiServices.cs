@@ -28,7 +28,7 @@ namespace EroiVsMostri.Services
         }
 
         //GET BY ID
-        //cotrollo se k'id è un numero e se è valido
+        //cotrollo se l'id è un numero e se è valido
         public Eroe GetEroeByID()
         {
             Eroe eroe = new Eroe();
@@ -59,33 +59,42 @@ namespace EroiVsMostri.Services
                     Console.WriteLine("Inserisci un numero!");
                 }
             }
-            Console.WriteLine(eroe.ToString());
+            //Console.WriteLine(eroe.ToString());
             return eroe;
         }
 
         //DELETE
         //controllo se l'id esiste e se è un numero
-        public void DeleteEroe()
+        //gli passo come parametro un id, se quell'id non è zero voglio eliminare l'eroe senza l'interazione del
+        //utente altrimenti chiedo al giocatore quale eroe vuole cancellare
+        public void DeleteEroe(int idEroe)
         {
             Eroe eroe = new Eroe();
-            int id = 0;
+            bool elimina;
 
-            while (eroe.ID == 0)
+            if(idEroe == 0)
             {
-                try
+                int id = 0;
+                while (eroe.ID == 0)
                 {
-                    Console.WriteLine("Inserisci l'id del eroe che vuoi eleminare:");
-                    id = Convert.ToInt32(Console.ReadLine());
-                    eroe = _repo.GetByID(id);
-                }
-                catch (Exception)
-                {
-
-                    Console.WriteLine("Inserisci un numero valido!");
+                    try
+                    {
+                        Console.WriteLine("Inserisci l'id del eroe che vuoi eleminare:");
+                        id = Convert.ToInt32(Console.ReadLine());
+                        eroe = _repo.GetByID(id);
+                    }
+                    catch (Exception)
+                    {
+                        Console.WriteLine("Inserisci un numero valido!");
+                    }
                 }
             }
-            bool elimina = _repo.Delete(eroe);
+            else
+            {
+                eroe = _repo.GetByID(idEroe);
+            }
 
+            elimina = _repo.Delete(eroe);
             if (elimina == false)
                 Console.WriteLine("Errore, eroe non presente.");
         }
@@ -98,7 +107,7 @@ namespace EroiVsMostri.Services
         }
 
         //INSERT
-        public void CreateEroe(Giocatore proprietario)
+        public Eroe CreateEroe(Giocatore proprietario)
         {
             Console.WriteLine("Crea un nuovo Eroe:");
             //chiedo i paramentri
@@ -106,61 +115,40 @@ namespace EroiVsMostri.Services
             //nome
             Console.WriteLine("Nome del Eroe: ");
             string nome = Console.ReadLine();
-            //classe
+            //classe, stampo la lista di tutte le classi per gli eroei presenti con GetAllClassi 
+            //e gli faccio scegliere la classe con GetClasseByID
             var classi = new ClassiServices(new ADOClasseRepository());
-            Console.WriteLine("Scegli una classe dalla seguenti lista: ");
-            classi.GetAllClasse();
-            int idClasse = 0;
-            Console.WriteLine("Inserisci l'id del eroe che vuoi scegliere:");
-            //try
-            //{
-            //    idClasse = Convert.ToInt32(Console.ReadLine());
-            //}
-            //catch (Exception)
-            //{
-            //    Console.WriteLine("Inserisci un numero!");
-            //}
-
-            //while (eroe.ID == 0)
-            //{
-            //    Console.WriteLine("Inserisci un id valido:");
-            //    try
-            //    {
-            //        id = Convert.ToInt32(Console.ReadLine());
-            //        eroe = _repo.GetByID(id);
-            //    }
-            //    catch (Exception)
-            //    {
-
-            //        Console.WriteLine("Inserisci un numero!");
-            //    }
-            //}
-
-            //arma
-            //IsEroe
+            Console.WriteLine("Scegli una classe tra quelle disponibili:");
             bool eroe = true;
-            //Punti vita
-            int pv = 20;
-            //livello
-            int livello = 1;
-            //punti accumulati
-            int pa = 0;
-            //proprietario
-
+            classi.GetAllClassi(eroe);
+            Classe classeScelta = classi.GetClassByID();
+            //arma, stessa cosa della classe
+            var armi = new ArmiServices(new ADOArmaRepository());
+            Console.WriteLine("Armi disponibili per " + classeScelta.Nome + ":");
+            armi.GetAllArmi(classeScelta.ID);
+            Arma armaScelta = armi.GetArmaByID(0);
+            //li gestisco nel costruttore
+            //IsEroe, è sempre true
+            //Punti vita all'inizio sono sempre 20
+            //livello all'inizio è sempre 1
+            //punti accumulati all'inizio sono sempre 0
+            //proprietario, me lo passo come parametro della funzione
 
             Eroe nuovoEroe = new Eroe()
             {
                 Nome = nome,
-                ClasseDiAppartenenza = 1,
-                ArmaScelta = 1,
-                IsEroe = eroe,
-                PuntiVita = pv,
-                Livello = livello,
-                PuntiAccumulati = pa,
+                ClasseDiAppartenenza = classeScelta.ID,
+                ArmaScelta = armaScelta.ID,
+                IsEroe = true,
+                PuntiVita = 20,
+                Livello = 1,
+                PuntiAccumulati = 0,
                 Proprietario = proprietario.ID
             };
 
             _repo.Create(nuovoEroe);
+            return nuovoEroe;
         }
+
     }
 }

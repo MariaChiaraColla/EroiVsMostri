@@ -16,14 +16,14 @@ namespace EroiVsMostri.Services
 
         //Get All Armi
         //per il momento restitruisce tutte le armi, provo a amettere il controllo in eroe
-        public IEnumerable<Arma> GetAllArmi()
+        public IEnumerable<Arma> GetAllArmi(int idClasse)
         {
             List<Arma> ArmiPerClasse = new List<Arma>();
-            //Classe classeDiAppartenenza = ClassiServices.GetClassByID();
             IEnumerable<Arma> TutteLeArmi = _repo.GetAll();
+
             foreach (var a in TutteLeArmi)
             {
-                if (a.ClasseApparteneza == 1)
+                if (a.ClasseApparteneza == idClasse)
                 {
                     ArmiPerClasse.Add(a);
                 }
@@ -37,24 +37,20 @@ namespace EroiVsMostri.Services
 
         //Get by ID
         //restituisce l'arma scelta, controllo che sia un numero e che sia valido
-        public Arma GetArmaByID()
+        //il parametroID lo passo solo se voglio resistuisco l'arma senza l'interazione con l'utente
+        //so che l'id nel db on può essere zero quindi lo uso per il ramo dell'else con l'irazione utente
+        public Arma GetArmaByID(int parametroID)
         {
             Arma arma = new Arma();
-            int id = 0;
-            Console.WriteLine("Inserisci l'id dell'arma che vuoi scegliere:");
-            try
-            {
-                id = Convert.ToInt32(Console.ReadLine());
-                arma = _repo.GetByID(id);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Inserisci un numero!");
-            }
 
-            while (arma.ID == 0)
+            if (parametroID != 0)
             {
-                Console.WriteLine("Inserisci un id valido:");
+                arma = _repo.GetByID(parametroID);
+            }
+            else
+            {
+                int id = 0;
+                Console.WriteLine("Inserisci l'id dell'arma che vuoi scegliere:");
                 try
                 {
                     id = Convert.ToInt32(Console.ReadLine());
@@ -62,11 +58,26 @@ namespace EroiVsMostri.Services
                 }
                 catch (Exception)
                 {
-
                     Console.WriteLine("Inserisci un numero!");
                 }
+
+                while (arma.ID == 0)
+                {
+                    Console.WriteLine("Inserisci un id valido:");
+                    try
+                    {
+                        id = Convert.ToInt32(Console.ReadLine());
+                        arma = _repo.GetByID(id);
+                    }
+                    catch (Exception)
+                    {
+
+                        Console.WriteLine("Inserisci un numero!");
+                    }
+                }
+                Console.WriteLine(arma.ToString());
             }
-            Console.WriteLine(arma.ToString());
+
             return arma;
         }
     }

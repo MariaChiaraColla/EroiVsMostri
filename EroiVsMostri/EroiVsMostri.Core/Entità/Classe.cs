@@ -30,7 +30,7 @@ namespace EroiVsMostri.Core.Entità
                 eroe = "Eroe";
             else
                 eroe = "Mostro";
-            return ID +")"+eroe + ": " + Nome;
+            return ID +") "+ Nome;
         }
     }
 }

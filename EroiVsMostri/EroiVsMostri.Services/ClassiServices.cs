@@ -16,23 +16,23 @@ namespace EroiVsMostri.Services
 
         //get all Classi, 
         //creo due liste, quella che contiene tutti 
-        //e quella che restituisco con solo le classi eroe (IsEroe == true)
-        public IEnumerable<Classe> GetAllClasse()
+        //e quella che restituisce solo le classi eroe o mostro a seconda del passato (IsEroe == true)
+        public IEnumerable<Classe> GetAllClassi(bool eroe)
         {
-            List<Classe> classiEroe = new List<Classe>();
+            List<Classe> classiEroeOmostro = new List<Classe>();
             IEnumerable<Classe> TutteLeClassi = _repo.GetAll();
             foreach(var c in TutteLeClassi)
             {
-                if(c.IsEroe == true)
+                if(c.IsEroe == eroe)
                 {
-                    classiEroe.Add(c);
+                    classiEroeOmostro.Add(c);
                 }
             }
-            foreach(var classe in classiEroe)
+            foreach(var classe in classiEroeOmostro)
             {
                 Console.WriteLine(classe);
             }
-            return classiEroe;
+            return classiEroeOmostro;
         }
 
         //get by id Classe,
@@ -42,7 +42,7 @@ namespace EroiVsMostri.Services
         {
             Classe classe = new Classe();
             int id = 0;
-            Console.WriteLine("Inserisci l'id della classe che vuoi scegliere:");
+            //Console.WriteLine("Inserisci l'id della classe che vuoi scegliere:");
             try
             {
                 id = Convert.ToInt32(Console.ReadLine());
@@ -67,7 +67,7 @@ namespace EroiVsMostri.Services
                     Console.WriteLine("Inserisci un numero!");
                 }
             }
-            Console.WriteLine(classe.ToString());
+            //Console.WriteLine(classe.ToString());
             return classe;
         }
     }

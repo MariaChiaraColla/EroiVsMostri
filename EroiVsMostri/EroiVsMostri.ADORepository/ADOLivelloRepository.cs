@@ -23,11 +23,40 @@ namespace EroiVsMostri.ADORepository
             throw new NotImplementedException();
         }
 
-        public Livelli GetByID(int ID)
+        public Livelli GetByID(int id)
         {
-            throw new NotImplementedException();
+            Livelli livello = new Livelli();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //apro la connessione
+                connection.Open();
+
+                //creo il comando
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "SELECT * FROM Livello WHERE Livello=@id";
+                command.Parameters.AddWithValue("@id", id);
+
+                //eseguo il comando
+                SqlDataReader reader = command.ExecuteReader();
+
+                //leggo e salvo i dati letti
+                while (reader.Read())
+                {
+                    //devo creare un estenzione del reader
+                    livello = reader.ToLivello();
+                }
+
+                //chiudo
+                reader.Close();
+                connection.Close();
+            }
+            return livello;
         }
 
+        //get all: tutti i livelli con i punti vita corrispondenti
         public IEnumerable<Livelli> GetAll()
         {
             List<Livelli> Livelli = new List<Livelli>();

@@ -16,11 +16,5 @@ namespace EroiVsMostri.Core.Abstract
         public int PuntiVita { get; set; }
         public int Livello { get; set; }
 
-        //Metodi
-        public virtual void Attacco(Personaggio avversario)
-        {
-            //int danni = ArmaScelta.PuntiDanno;
-            //avversario.PuntiVita = avversario.PuntiVita - danni;
-        }
     }
 }

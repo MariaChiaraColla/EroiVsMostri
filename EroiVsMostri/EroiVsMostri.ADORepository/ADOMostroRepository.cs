@@ -8,12 +8,13 @@ using System.Text;
 
 namespace EroiVsMostri.ADORepository
 {
-    public class ADOEroeRepository : IEroeRepository
+    public class ADOMostroRepository : IMostroRepository
     {
         //stringa di connessione
         const string connectionString = @"Persist Security Info = False; Integrated Security = true; Initial Catalog=EroiVsMostri; Server = .\SQLEXPRESS";
 
-        public void Create(Eroe obj)
+        //creo il mostro
+        public void Create(Mostro obj)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -24,7 +25,7 @@ namespace EroiVsMostri.ADORepository
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "INSERT INTO Eroe VALUES(@Nome,@ClasseID,@ArmaID,@IsEroe,@PuntiVita,@Livello,@PuntiAccumulati,@GiocatoreID)";
+                command.CommandText = "INSERT INTO Mostro VALUES(@Nome,@ClasseID,@ArmaID,@IsEroe,@PuntiVita,@Livello)";
 
                 //aggiungo i parametri al comando
                 command.Parameters.AddWithValue("@Nome", obj.Nome);
@@ -33,25 +34,23 @@ namespace EroiVsMostri.ADORepository
                 command.Parameters.AddWithValue("@IsEroe", obj.IsEroe);
                 command.Parameters.AddWithValue("@PuntiVita", obj.PuntiVita);
                 command.Parameters.AddWithValue("@Livello", obj.Livello);
-                command.Parameters.AddWithValue("@PuntiAccumulati", obj.PuntiAccumulati);
-                command.Parameters.AddWithValue("@GiocatoreID", obj.Proprietario);
 
                 //eseguo il comando
                 int row = command.ExecuteNonQuery();
 
                 //stampo il successo o no
                 if (row > 0)
-                    Console.WriteLine("L'eroe è stata creato con successo!");
+                    Console.WriteLine("Il mostro è stata creato con successo!");
                 else
-                    Console.WriteLine("Errore, eroe non creato.");
+                    Console.WriteLine("Errore, mostro non creato.");
 
                 //chiudo
                 connection.Close();
             }
         }
 
-        //cancello l'eroe con l'id dell'eroe che mi è stato passato
-        public bool Delete(Eroe obj)
+        //cancello il mostro con l'id del mostro che mi è stato passato
+        public bool Delete(Mostro obj)
         {
             bool successo = false;
 
@@ -64,7 +63,7 @@ namespace EroiVsMostri.ADORepository
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "DELETE FROM Eroe WHERE ID=@id";
+                command.CommandText = "DELETE FROM Mostro WHERE ID=@id";
 
                 //aggiungo i parametri al comando
                 command.Parameters.AddWithValue("@id", obj.ID);
@@ -75,11 +74,11 @@ namespace EroiVsMostri.ADORepository
                 //stampo il successo o no
                 if (row > 0)
                 {
-                    Console.WriteLine("L'eroe è stata cancellato!");
+                    Console.WriteLine("Il mostro è stata cancellato!");
                     successo = true;
                 }
                 else
-                    Console.WriteLine("Errore, eroe non cancellato.");
+                    Console.WriteLine("Errore, mostro non cancellato.");
 
                 //chiudo
                 connection.Close();
@@ -87,10 +86,10 @@ namespace EroiVsMostri.ADORepository
             return successo;
         }
 
-        //tutti gli eroi
-        public IEnumerable<Eroe> GetAll()
+        //tutti i mostri
+        public IEnumerable<Mostro> GetAll()
         {
-            List<Eroe> Eroi = new List<Eroe>();
+            List<Mostro> Mostri = new List<Mostro>();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -101,7 +100,7 @@ namespace EroiVsMostri.ADORepository
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "SELECT * FROM Eroe";
+                command.CommandText = "SELECT * FROM Mostro";
 
                 //eseguo il comando
                 SqlDataReader reader = command.ExecuteReader();
@@ -110,20 +109,20 @@ namespace EroiVsMostri.ADORepository
                 while (reader.Read())
                 {
                     //devo creare un estenzione del reader
-                    Eroi.Add(reader.ToEroe());
+                    Mostri.Add(reader.ToMostro());
                 }
 
                 //chiudo
                 reader.Close();
                 connection.Close();
             }
-            return Eroi;
+            return Mostri;
         }
 
-        //eroe con quel id
-        public Eroe GetByID(int id)
+        //mostro con quel id
+        public Mostro GetByID(int id)
         {
-            Eroe eroe = new Eroe();
+            Mostro mostro = new Mostro();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -134,7 +133,7 @@ namespace EroiVsMostri.ADORepository
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "SELECT * FROM Eroe WHERE ID=@id";
+                command.CommandText = "SELECT * FROM Mostro WHERE ID=@id";
                 command.Parameters.AddWithValue("@id", id);
 
                 //eseguo il comando
@@ -144,20 +143,18 @@ namespace EroiVsMostri.ADORepository
                 while (reader.Read())
                 {
                     //devo creare un estenzione del reader
-                    eroe = reader.ToEroe();
+                    mostro = reader.ToMostro();
                 }
 
                 //chiudo
                 reader.Close();
                 connection.Close();
             }
-            return eroe;
+            return mostro;
         }
 
         //update
-        //un eroe non può essere modificato
-        //ma dopo una scontro posso affiornare i punti vita, il livello, i punti accumulati
-        public bool Update(Eroe obj)
+        public bool Update(Mostro obj)
         {
             bool successo = false;
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -169,15 +166,13 @@ namespace EroiVsMostri.ADORepository
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "UPDATE Eroe SET PuntiVita=@pv, Livello=@livello, PuntiAccumulati=@pa WHERE ID=@ID";
+                command.CommandText = "UPDATE Mostro SET PuntiVita=@pv WHERE ID=@ID";
 
                 //parametri
                 //id, non modificabile
                 command.Parameters.AddWithValue("@ID", obj.ID);
                 // nuovi punti vita
                 command.Parameters.AddWithValue("@pv", obj.PuntiVita);
-                command.Parameters.AddWithValue("@livello", obj.Livello);
-                command.Parameters.AddWithValue("@pa", obj.PuntiAccumulati);
 
                 //eseguo il comando
                 int row = command.ExecuteNonQuery();
@@ -186,7 +181,10 @@ namespace EroiVsMostri.ADORepository
                 if (row > 0)
                 {
                     successo = true;
+                    Console.WriteLine("Aggiornato con successo");
                 }
+                else
+                    Console.WriteLine("Aggiornamento non riuscito");
 
                 //chiudo connessione
                 connection.Close();

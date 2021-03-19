@@ -29,7 +29,7 @@ namespace EroiVsMostri.ADORepository
 
                 //aggiungo i parametri al comando
                 command.Parameters.AddWithValue("@Nome", obj.Nome);
-                command.Parameters.AddWithValue("@Ruolo", obj.Ruolo);
+                command.Parameters.AddWithValue("@Ruolo", 0);
 
                 //eseguo il comando
                 int row = command.ExecuteNonQuery();
@@ -162,35 +162,14 @@ namespace EroiVsMostri.ADORepository
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "UPDATE Giocatore SET Nome=@nome, Ruolo=@ruolo WHERE ID=@ID";
+                command.CommandText = "UPDATE Giocatore SET Nome=@nome WHERE ID=@ID";
 
                 //parametri
-                //id, non modificabile
                 command.Parameters.AddWithValue("@ID", obj.ID);
-                // nuovo nome
                 Console.WriteLine("Inserisci il nuovo nome del giocatore:");
                 string nome = Console.ReadLine();
                 command.Parameters.AddWithValue("@nome", nome);
-
-                // nuovo ruolo
-                int r = 2;
-                bool ruolo = false;
-
-                while (r != 0 && r != 1)
-                {
-                    Console.WriteLine("Ruolo del giocatore: 1 per Admin, 2 per Utente ");
-                    try
-                    {
-                        r = Convert.ToInt32(Console.ReadLine());
-                    }
-                    catch (Exception)
-                    {
-                        Console.WriteLine("Inserisci 0 o 1!");
-                    }
-
-                }
-                if (r == 1) ruolo = true;
-                command.Parameters.AddWithValue("@ruolo", ruolo);
+                command.Parameters.AddWithValue("@ruolo", 0);
 
                 //eseguo il comando
                 int row = command.ExecuteNonQuery();
@@ -199,10 +178,7 @@ namespace EroiVsMostri.ADORepository
                 if (row > 0)
                 {
                     successo = true;
-                    Console.WriteLine("Aggiornato con successo");
                 }
-                else
-                    Console.WriteLine("Aggiornamento non riuscito");
 
                 //chiudo connessione
                 connection.Close();

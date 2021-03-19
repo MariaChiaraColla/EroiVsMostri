@@ -7,6 +7,11 @@ namespace EroiVsMostri.Core.Entità
 {
     public class Mostro: Personaggio
     {
-        
+        //Metodi
+        public override string ToString()
+        {
+            return ID + ") " + Nome + ", livello: "+ Livello;
+        }
+
     }
 }

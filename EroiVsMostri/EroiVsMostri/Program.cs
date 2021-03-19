@@ -43,6 +43,7 @@ namespace EroiVsMostri
             LivelliServices livelloService = serviceProvider.GetService<LivelliServices>();
             GiocatoriServices giocatoreService = serviceProvider.GetService<GiocatoriServices>();
             EroiServices eroeService = serviceProvider.GetService<EroiServices>();
+            MostriServices mostroService = serviceProvider.GetService<MostriServices>();
 
             //var classi = classeService.GetAllClasse();
             //foreach (var c in classi)
@@ -65,19 +66,35 @@ namespace EroiVsMostri
             //    Console.WriteLine(l);
             //}
 
-            //var giocatori = giocatoreService.GetAllGiocatori();
-            //var giocatore = giocatoreService.GetGiocatoreByID();
+            var giocatori = giocatoreService.GetAllGiocatori();
+            var giocatore = giocatoreService.GetGiocatoreByID();
 
-            ////giocatoreService.CreateGiocatore();
-            //bool s = giocatoreService.DeleteGiocatore();
-            //Console.WriteLine(s);
-            //giocatoreService.UpdateGiocatore();
+            //////giocatoreService.CreateGiocatore();
+            ////bool s = giocatoreService.DeleteGiocatore();
+            ////Console.WriteLine(s);
+            ////giocatoreService.UpdateGiocatore();
+
+            ////eroeService.GetAllEroi();
+            ////Eroe e = eroeService.GetEroeByID();
+            ////e.PuntiAccumulati = 0;
+            ////eroeService.UpdateEroe(e);
+            ////Console.WriteLine(e);
+
+            //eroeService.CreateEroe(giocatore);
+
+            //mostroService.GetAllMostri();
+            //mostroService.GetMostroByID(1);
+            //mostroService.CreateMostro();
+            //mostroService.DeleteMostro();
 
             //eroeService.GetAllEroi();
-            Eroe e = eroeService.GetEroeByID();
-            e.PuntiAccumulati = 0;
-            eroeService.UpdateEroe(e);
-            Console.WriteLine(e);
+            //Eroe eroe = eroeService.GetEroeByID();
+            //Turno turno = new Turno();
+            //turno.StartTurno(eroe);
+
+
+            MenuIniziale menu = new MenuIniziale();
+            menu.ShowMenu(giocatore);
         }
     }
 }

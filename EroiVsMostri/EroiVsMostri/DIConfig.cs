@@ -21,6 +21,9 @@ namespace EroiVsMostri
                 .AddScoped<LivelliServices>()
                 .AddScoped<GiocatoriServices>()
                 .AddScoped<EroiServices>()
+                .AddScoped<MostriServices>()
+                .AddScoped<LivelliServices>()
+                .AddScoped<PassaggiLivelliServices>()
 
                 //aggiungo un servizio che mappa l'astrazione con l'implementazione concreta
                 .AddScoped<IClasseRepository, ADOClasseRepository>()
@@ -29,6 +32,9 @@ namespace EroiVsMostri
                 .AddScoped<ILivelloRepository,ADOLivelloRepository>()
                 .AddScoped<IGiocatoreRepository,ADOGiocatoreRepository>()
                 .AddScoped<IEroeRepository, ADOEroeRepository>()
+                .AddScoped<IMostroRepository, ADOMostroRepository>()
+                .AddScoped<ILivelloRepository, ADOLivelloRepository>()
+                .AddScoped<IPassaggioLivelloRepository, ADOPassaggioLivelloRepository>()
 
                 //costruisco il provider
                 .BuildServiceProvider();
