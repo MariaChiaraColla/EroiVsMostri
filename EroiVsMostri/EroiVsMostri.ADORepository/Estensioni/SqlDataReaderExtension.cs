@@ -48,7 +48,7 @@ namespace EroiVsMostri.ADORepository.Estensioni
             {
                 ID = (int)reader["ID"],
                 Nome = (string)reader["Nome"],
-                Ruolo = (bool)reader["Ruolo"]
+                Admin = (bool)reader["Ruolo"]
             };
         }
 
@@ -65,7 +65,8 @@ namespace EroiVsMostri.ADORepository.Estensioni
                 PuntiVita = (int)reader["PuntiVita"],
                 Livello = (int)reader["Livello"],
                 PuntiAccumulati = (int)reader["PuntiAccumulati"],
-                Proprietario = (int)reader["GiocatoreID"]
+                Proprietario = (int)reader["GiocatoreID"],
+                TempoDiGioco = (int)reader["TempoTotale"]
             };
         }
 

@@ -14,7 +14,7 @@ namespace EroiVsMostri.ADORepository
         const string connectionString = @"Persist Security Info = False; Integrated Security = true; Initial Catalog=EroiVsMostri; Server = .\SQLEXPRESS";
 
         //creo il mostro
-        public void Create(Mostro obj)
+        public Mostro Create(Mostro obj)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -47,6 +47,7 @@ namespace EroiVsMostri.ADORepository
                 //chiudo
                 connection.Close();
             }
+            return obj;
         }
 
         //cancello il mostro con l'id del mostro che mi è stato passato

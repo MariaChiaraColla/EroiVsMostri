@@ -79,6 +79,7 @@ namespace EroiVsMostri.Services
                 {
                     try
                     {
+                        Console.WriteLine("Elimina Eroe:");
                         Console.WriteLine("Inserisci l'id del eroe che vuoi eleminare:");
                         id = Convert.ToInt32(Console.ReadLine());
                         eroe = _repo.GetByID(id);
@@ -133,6 +134,7 @@ namespace EroiVsMostri.Services
             //livello all'inizio è sempre 1
             //punti accumulati all'inizio sono sempre 0
             //proprietario, me lo passo come parametro della funzione
+            //tempo = null
 
             Eroe nuovoEroe = new Eroe()
             {
@@ -143,12 +145,43 @@ namespace EroiVsMostri.Services
                 PuntiVita = 20,
                 Livello = 1,
                 PuntiAccumulati = 0,
-                Proprietario = proprietario.ID
+                Proprietario = proprietario.ID,
+                TempoDiGioco = 0
             };
 
             _repo.Create(nuovoEroe);
-            return nuovoEroe;
+            Eroe nuovo = _repo.GetByName(nuovoEroe.Nome);
+            return nuovo;
         }
 
+
+
+        //GET ALL eroi per quel determinato giocatore
+        //restituisce tutti gli eroi
+        //se i = 1 stampo gli eroi
+        //altrimenti li restituisco e basta
+        public IEnumerable<Eroe> GetAllEroiByGiocatore(Giocatore giocatore, int i)
+        {
+            IEnumerable<Eroe> Eroi = _repo.GetAllByGiocatore(giocatore);
+
+            if (i == 1)
+            {
+                foreach (var eroe in Eroi)
+                {
+                    Console.WriteLine(eroe);
+                }
+            }
+            
+            return Eroi;
+        }
+
+        //GET BY ID
+        //cotrollo se l'id è un numero e se è valido
+        public Eroe GetEroeByName(string name)
+        {
+            Eroe eroe = _repo.GetByName(name);
+
+            return eroe;
+        }
     }
 }

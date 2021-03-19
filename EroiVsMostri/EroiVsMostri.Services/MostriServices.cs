@@ -32,7 +32,7 @@ namespace EroiVsMostri.Services
         //id random tra i mostro con livello <= eroe filtrati da GetAllMostri()
         public Mostro GetMostroByID(Eroe eroe)
         {
-            //uso _repo.GetAAl e non GetAllMostri() perchè così non me li stampa a schemro
+            //uso _repo.GetAll e non GetAllMostri() perchè così non me li stampa a schemro
             IEnumerable<Mostro> tuttiMostri = _repo.GetAll();
             List<Mostro> mostriFiltroLivelloEroe = new List<Mostro>();
 
@@ -91,7 +91,7 @@ namespace EroiVsMostri.Services
 
         //INSERT
         //DA MODOFICARE
-        public void CreateMostro()
+        public Mostro CreateMostro()
         {
             Console.WriteLine("Crea un nuovo Mostro:");
             //chiedo i paramentri
@@ -114,20 +114,49 @@ namespace EroiVsMostri.Services
             //li gestisco nel costruttore
             //IsEroe, è sempre false
             //Punti vita all'inizio sono sempre 20
-            //livello all'inizio è sempre 1
+            //posso scegliere anche il livello
+            var livelli = new LivelliServices(new ADOLivelloRepository());
+            Console.WriteLine("Scegli un livello tra quelli disponibili:");
+            List<Livelli>Liv = (List<Livelli>)livelli.GetAllLivelli(1);
+            bool ok = false;
+            int id =0;
+            while (ok == false)
+            {
+                try
+                {
+                    Console.WriteLine("Scegli in livello");
+                    id = Convert.ToInt32(Console.ReadLine());
+                    if (id > 0 && id <= Liv.Count)
+                    {
+                        ok = true;
+                    }
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Scegli un livello valido!");
+                }
+            }
+            Livelli livelloScelto = livelli.GetLivelloByID(id);
 
             Mostro nuovoMostro = new Mostro()
             {
                 Nome = nome,
                 ClasseDiAppartenenza = classeScelta.ID,
                 ArmaScelta = armaScelta.ID,
-                IsEroe = true,
-                PuntiVita = 20,
-                Livello = 1,
+                IsEroe = false,
+                PuntiVita = livelloScelto.PuntiVita,
+                Livello = livelloScelto.Livello,
             };
 
-            _repo.Create(nuovoMostro);
+           Mostro nuovo = _repo.Create(nuovoMostro);
+           return nuovo;
         }
+
+
+
+
+
+
     }
 
 }

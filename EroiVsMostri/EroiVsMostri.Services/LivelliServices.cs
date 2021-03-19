@@ -15,16 +15,23 @@ namespace EroiVsMostri.Services
         }
 
         //GET ALL, recupero tutti i possibili livelli con i punti vita corrispondenti
-        public IEnumerable<Livelli> GetAllLivelli()
+        //se i = 1 li stampo anche
+        public IEnumerable<Livelli> GetAllLivelli(int i)
         {
             IEnumerable<Livelli> Livelli = _repo.GetAll();
-            //foreach(var livello in Livelli)
-            //{
-            //    Console.WriteLine(livello);
-            //}
+
+            if(i == 1)
+            {
+                foreach (var livello in Livelli)
+                {
+                    Console.WriteLine(livello);
+                }
+            }
+  
             return Livelli;
         }
 
+        //GET BY ID
         public Livelli GetLivelloByID(int id)
         {
             Livelli livello = _repo.GetByID(id);

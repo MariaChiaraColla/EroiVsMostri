@@ -7,6 +7,17 @@ namespace EroiVsMostri.Core.Entità
 {
     public class Mostro: Personaggio
     {
+        //costruttori
+        public Mostro() { }
+        public Mostro(string nome, int classe, int arma)
+        {
+            Nome = nome;
+            ClasseDiAppartenenza = classe;
+            ArmaScelta = arma;
+            IsEroe = false;
+            Livello = 1;
+            PuntiVita = 20;
+        }
         //Metodi
         public override string ToString()
         {

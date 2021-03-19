@@ -7,5 +7,7 @@ namespace EroiVsMostri.Core.Interfacce
 {
     public interface IGiocatoreRepository : IRepository<Giocatore>
     {
+        //get giocatore by name
+        Giocatore GetByName(string name);
     }
 }

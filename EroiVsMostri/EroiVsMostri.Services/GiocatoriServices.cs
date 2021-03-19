@@ -15,14 +15,21 @@ namespace EroiVsMostri.Services
         }
 
         //GET ALL
-        //restituisce un IEnurable e li stampa
-        public IEnumerable<Giocatore> GetAllGiocatori()
+        //restituisce un IEnurable
+        //se i = 1 voglio stampare a schermo i risultati
+        //altrimenti non li stampo
+        public IEnumerable<Giocatore> GetAllGiocatori(int i)
         {
             IEnumerable<Giocatore> Giocatori = _repo.GetAll();
-            foreach(var giocatore in Giocatori)
+
+            if (i == 1)
             {
-                Console.WriteLine(giocatore);
+                foreach (var giocatore in Giocatori)
+                {
+                    Console.WriteLine(giocatore);
+                }
             }
+
             return Giocatori;
         }
 
@@ -62,21 +69,16 @@ namespace EroiVsMostri.Services
         }
 
         //INSERT
-        public void CreateGiocatore()
+        public Giocatore CreateGiocatore(string nome)
         {
-            Console.WriteLine("Crea un nuovo giocatore:");
-            //chiedo i paramentri
-
-            //nome
-            Console.WriteLine("Nome del giocatore: ");
-            string nome = Console.ReadLine();
-
             Giocatore giocatore = new Giocatore()
             {
                 Nome = nome
             };
 
-            _repo.Create(giocatore);
+            Giocatore giocatore1 = _repo.Create(giocatore);
+
+            return giocatore1;
         }
 
         //DELETE
@@ -134,7 +136,19 @@ namespace EroiVsMostri.Services
             _repo.Update(giocatore);
         }
 
+        //GET BY ID,
+        //controllo se esiste
+        public Giocatore GetGiocatoreByName(string name)
+        {
+            Giocatore giocatore = _repo.GetByName(name);
+            if(giocatore.ID == 0)
+            {
+                CreateGiocatore(name);
+                giocatore = GetGiocatoreByName(name);
+            }
 
+            return giocatore;
+        }
 
     }
 }

@@ -10,10 +10,22 @@ namespace EroiVsMostri.Core.Entità
         //proprietà
         public int Proprietario { get; set; }
         public int PuntiAccumulati { get; set; }
+        public long? TempoDiGioco { get; set; }
 
         //costruttori
         public Eroe()
         {
+        }
+        public Eroe(string nome, int classe, int arma)
+        {
+            Nome = nome;
+            ClasseDiAppartenenza = classe;
+            ArmaScelta = arma;
+            Livello = 1;
+            PuntiVita = 20;
+            PuntiAccumulati = 0;
+            TempoDiGioco = 0;
+            IsEroe = true;
         }
 
         //metodi

@@ -14,8 +14,9 @@ namespace EroiVsMostri.ADORepository
         const string connectionString = @"Persist Security Info = False; Integrated Security = true; Initial Catalog=EroiVsMostri; Server = .\SQLEXPRESS";
 
         //creo un nuovo giocatore
-        public void Create(Giocatore obj)
+        public Giocatore Create(Giocatore obj)
         {
+            Giocatore giocatore = new Giocatore();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 //apro la connessione
@@ -32,17 +33,19 @@ namespace EroiVsMostri.ADORepository
                 command.Parameters.AddWithValue("@Ruolo", 0);
 
                 //eseguo il comando
-                int row = command.ExecuteNonQuery();
+                SqlDataReader reader = command.ExecuteReader();
 
-                //stampo il successo o no
-                if (row > 0)
-                    Console.WriteLine("Il giocatore è stata aggiunto con successo!");
-                else
-                    Console.WriteLine("Errore, giocatore no aggiunto.");
+                //leggo e salvo i dati letti
+                while (reader.Read())
+                {
+                    //devo creare un estenzione del reader
+                    giocatore = reader.ToGiocatore();
+                }
 
                 //chiudo
                 connection.Close();
             }
+            return giocatore;
         }
 
         //Cancella giocatore e ritorna bool se c'è riusicto o no
@@ -187,5 +190,39 @@ namespace EroiVsMostri.ADORepository
             return successo;
         }
 
+
+        //ricerca giocatore per nome
+        public Giocatore GetByName(string name)
+        {
+            Giocatore giocatore = new Giocatore();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //apro la connessione
+                connection.Open();
+
+                //creo il comando
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = System.Data.CommandType.Text;
+                command.CommandText = "SELECT * FROM Giocatore WHERE Nome=@nome";
+                command.Parameters.AddWithValue("@nome", name);
+
+                //eseguo il comando
+                SqlDataReader reader = command.ExecuteReader();
+
+                //leggo e salvo i dati letti
+                while (reader.Read())
+                {
+                    //devo creare un estenzione del reader
+                    giocatore = reader.ToGiocatore();
+                }
+
+                //chiudo
+                reader.Close();
+                connection.Close();
+            }
+            return giocatore;
+        }
     }
 }

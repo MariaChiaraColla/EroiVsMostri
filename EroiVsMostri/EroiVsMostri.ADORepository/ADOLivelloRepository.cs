@@ -13,7 +13,7 @@ namespace EroiVsMostri.ADORepository
         //stringa di connessione
         const string connectionString = @"Persist Security Info = False; Integrated Security = true; Initial Catalog=EroiVsMostri; Server = .\SQLEXPRESS";
 
-        public void Create(Livelli obj)
+        public Livelli Create(Livelli obj)
         {
             throw new NotImplementedException();
         }

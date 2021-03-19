@@ -42,16 +42,6 @@ namespace EroiVsMostri.Services
         {
             Classe classe = new Classe();
             int id = 0;
-            //Console.WriteLine("Inserisci l'id della classe che vuoi scegliere:");
-            try
-            {
-                id = Convert.ToInt32(Console.ReadLine());
-                classe = _repo.GetByID(id);
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Inserisci un numero!");
-            }
             
             while (classe.ID == 0)
             {

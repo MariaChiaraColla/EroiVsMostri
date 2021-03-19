@@ -27,6 +27,7 @@ namespace EroiVsMostri
 
             //inizio lo scontro
             Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine();
             Console.WriteLine("INIZIO SCONTRO!");
             Console.WriteLine("------ " + eroe.Nome + ", livello: " + eroe.Livello + "   Vs   " + mostro.Nome + ", livello: " + mostro.Livello + " ------");
             Console.ResetColor();
@@ -44,6 +45,7 @@ namespace EroiVsMostri
                 Console.WriteLine();
                 int risultatoAzione = 0;
                 int azioneEroe = MenuAzioniTurno();
+
                 switch (azioneEroe)
                 {
                     case 1:
@@ -89,17 +91,21 @@ namespace EroiVsMostri
         //menu delle azione che l'eroe può fare per ogni turno: attacco, fuga
         public int MenuAzioniTurno()
         {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine("Azioni Possibili:");
             Console.WriteLine("1) Attacca");
             Console.WriteLine("2) Tenta la fuga");
             Console.WriteLine();
+            Console.ResetColor();
             bool ok = false;
             int azione = 0;
             while(ok == false)
             {
                 try
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkCyan;
                     Console.WriteLine("Scegli un azione: ");
+                    Console.ResetColor();
                     azione = Convert.ToInt32(Console.ReadLine());
                     if (azione == 1 || azione == 2) ok = true;
                 }
@@ -126,6 +132,7 @@ namespace EroiVsMostri
             EroiServices eroeService = serviceProvider.GetService<EroiServices>();
             //recupero l'arma dell'attaccate
             var arma = armaService.GetArmaByID(attaccante.ArmaScelta);
+
             //tolgo i punti danno dell' arma ai punti vita dell'avversario
             avversario.PuntiVita = avversario.PuntiVita - arma.PuntiDanno;
             //stampo i punti vita dopo l'attacco, solo se nessuno dei due è morto
@@ -133,16 +140,20 @@ namespace EroiVsMostri
             {
                 if (attaccante.PuntiVita > 0 && avversario.PuntiVita > 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine("Punti vita: " + attaccante.Nome + "= " + attaccante.PuntiVita + " e " + avversario.Nome + "= " + avversario.PuntiVita);
                     i = 1;
+                    Console.ResetColor();
                 }
             }
             else 
             {
                 if (attaccante.PuntiVita > 0 && avversario.PuntiVita > 0)
                 {
+                    Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine("Punti vita: " + avversario.Nome + "= " + avversario.PuntiVita + " e " + attaccante.Nome + "= " + attaccante.PuntiVita);
                     i = 1;
+                    Console.ResetColor();
                 }   
             }
 
@@ -218,7 +229,7 @@ namespace EroiVsMostri
             
         }
 
-        //se l'eroe vince lo scontro gli assegno dei punti e li salvo anche nel db
+        //se l'eroe vince lo scontro gli assegno dei punti e controllo se è passato di livello o se ha vinto
         public void VittoriaPunti(Eroe eroe, Mostro mostro)
         {
             int puntiVinti = mostro.Livello * 10;
@@ -227,17 +238,19 @@ namespace EroiVsMostri
             Console.WriteLine("Hai vinto " + puntiVinti + " punti!, Punti totali: " + eroe.PuntiAccumulati);
             Console.ResetColor();
 
-            //controllo se l'eroe è passato di livello
+            //controllo se l'eroe è passato di livello 
             PassaggioDiLivello(eroe);
 
-            //salvo dati nel db
-            var serviceProvider = DIConfig.Configurazione();
-            EroiServices eroeService = serviceProvider.GetService<EroiServices>();
-
-            eroeService.UpdateEroe(eroe);
+            //controllo se HA VINTO
+            if(eroe.PuntiAccumulati == 200)
+            {
+                Console.ForegroundColor = ConsoleColor.Magenta;
+                Console.WriteLine("CONGRATULAZIONI HAI VINTO IL GIOCO!!!");
+                Console.ResetColor();
+            }
         }
 
-        //passaggio di livello, aggiorno i punti vita e il livello dell'eroe nel db
+        //passaggio di livello e vittoria
         public void PassaggioDiLivello(Eroe eroe)
         {
             //recupero dal db tutti i livelli con i punti necessari e i punti vita corrispondenti
@@ -246,7 +259,7 @@ namespace EroiVsMostri
             PassaggiLivelliServices passaggioLiv = serviceProvider.GetService<PassaggiLivelliServices>();
             EroiServices eroeService = serviceProvider.GetService<EroiServices>();
 
-            List<Livelli> LivelliPV = (List<Livelli>)livelloService.GetAllLivelli();
+            List<Livelli> LivelliPV = (List<Livelli>)livelloService.GetAllLivelli(0);
             List<PassaggioLivello> LivelliPA = (List<PassaggioLivello>)passaggioLiv.GetAllPassaggiLivelli();
 
             foreach(var liv in LivelliPA)
@@ -262,8 +275,10 @@ namespace EroiVsMostri
                     Console.WriteLine("I tuoi punti vita sono stati rispristinati a " + eroe.PuntiVita);
                     Console.ResetColor();
                 }
-            }
-            eroeService.UpdateEroe(eroe);
+            } 
         }
+
+
+
     }
 }

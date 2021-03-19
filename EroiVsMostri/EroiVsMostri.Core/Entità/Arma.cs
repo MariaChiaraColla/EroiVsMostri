@@ -12,6 +12,17 @@ namespace EroiVsMostri.Core.Entità
         public int PuntiDanno { get; set; }
         public int ClasseApparteneza { get; set; }
 
+        //costruttori
+        public Arma()
+        {
+        }
+        public Arma(string name, int pd, int classe)
+        {
+            Nome = name;
+            PuntiDanno = pd;
+            ClasseApparteneza = classe;
+        }
+
         //Metodi
         public override string ToString()
         {

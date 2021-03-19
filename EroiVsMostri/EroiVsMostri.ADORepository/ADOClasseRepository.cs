@@ -11,7 +11,7 @@ namespace EroiVsMostri.ADORepository
     {
         //stringa di connessione
         const string connectionString = @"Persist Security Info = False; Integrated Security = true; Initial Catalog=EroiVsMostri; Server = .\SQLEXPRESS";
-        public void Create(Classe obj)
+        public Classe Create(Classe obj)
         {
             throw new NotImplementedException();
         }
@@ -21,7 +21,7 @@ namespace EroiVsMostri.ADORepository
             throw new NotImplementedException();
         }
 
-        //GET BY ID CLASSE
+        //GET BY ID CLASSE Solo eroi
         public Classe GetByID(int id)
         {
             Classe classeById = new Classe();
@@ -35,7 +35,7 @@ namespace EroiVsMostri.ADORepository
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "SELECT * FROM Classe WHERE ID = @ID AND IsEroe=1";
+                command.CommandText = "SELECT * FROM Classe WHERE ID = @ID";
                 command.Parameters.AddWithValue("@ID", id);
 
                 //esecuzione del comando
@@ -90,5 +90,7 @@ namespace EroiVsMostri.ADORepository
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

@@ -13,7 +13,7 @@ namespace EroiVsMostri.Core.Interfacce
         IEnumerable<T> GetAll();
 
         //aggiungi
-        void Create(T obj);
+        T Create(T obj);
         
         //modifica
         bool Update(T obj);

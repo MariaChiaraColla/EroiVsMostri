@@ -15,9 +15,8 @@ namespace EroiVsMostri.Core.Entità
         public Classe()
         {
         }
-        public Classe(int id, string nome, bool eroe)
+        public Classe(string nome, bool eroe)
         {
-            ID = id;
             Nome = nome;
             IsEroe = eroe;
         }

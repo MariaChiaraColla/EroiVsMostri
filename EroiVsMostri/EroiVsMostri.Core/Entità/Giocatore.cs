@@ -9,7 +9,7 @@ namespace EroiVsMostri.Core.Entità
         //proprietà
         public int ID { get; set; }
         public string Nome { get; set; }
-        public bool Ruolo { get; set; }
+        public bool Admin { get; set; }
 
         //costruttori
         public Giocatore()
@@ -18,14 +18,14 @@ namespace EroiVsMostri.Core.Entità
         public Giocatore(string nome)
         {
             Nome = nome;
-            Ruolo = false;
+            Admin = false;
         }
 
         //metodi
         public override string ToString()
         {
             string ruolo;
-            if (Ruolo == false)
+            if (Admin == false)
                 ruolo = "Utente: ";
             else
                 ruolo = "Admin: ";
